@@ -5,8 +5,16 @@
  */
 package battleship;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 
 /**
@@ -44,7 +52,24 @@ public class TableroTiro extends Tablero implements MouseListener{
             if(!c.itHasBeenShot()){
                 Boolean b = this.jugador.enviarDisparo(c.getI(), c.getJ());
                 if(b!=null){
-                    c.setState(b);
+                    if(b){
+                        c.setIcon(new ImageIcon("src/sources/explo.gif"));
+                        ActionListener action = new ActionListener(){
+                            @Override
+                            public void actionPerformed(ActionEvent e){
+                                if(e.getSource() instanceof Timer){
+                                    Timer timer = (Timer) e.getSource();
+                                    timer.stop();
+                                    c.setState(b);
+                                }
+                            }
+                        };
+                        Timer timer = new Timer (2000, action);
+                        timer.start();
+                    }else {
+                        c.setState(b);
+                    }
+                    playSoundExplo(b);
                 }
             }
         }
@@ -61,5 +86,27 @@ public class TableroTiro extends Tablero implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent me) {}
+    
+    private void playSoundExplo(boolean b){
+        Clip c;
+        try {
+            File m;
+            if(b){
+                m = new File("src/sources/Sounds/Blast.wav");
+            }else {
+                m = new File("src/sources/Sounds/miss.wav");
+            }
+            if(m.exists()){
+                AudioInputStream a = AudioSystem.getAudioInputStream(m);
+                c = AudioSystem.getClip();
+                c.open(a);
+                c.start();
+            }else {
+                System.out.println("ÑIEEEEEEEEEE");
+            }
+        }catch (Exception e)   {
+
+        } 
+    }
     
 }

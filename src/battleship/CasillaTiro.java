@@ -30,7 +30,6 @@ public class CasillaTiro extends JLabel{
         }else {
             this.setIcon(new ImageIcon("src/sources/miss.png"));
         }
-        this.hasBeenShot= true;
     }
 
     public int getI() {
@@ -45,5 +44,8 @@ public class CasillaTiro extends JLabel{
         return hasBeenShot;
     }
     
+    public void setShot(){
+        this.hasBeenShot=true;
+    }
     
 }

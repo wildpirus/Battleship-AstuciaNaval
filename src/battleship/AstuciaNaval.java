@@ -6,7 +6,10 @@
 package battleship;
 
 import GUI.LocalGamePanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  * Clase para que controla una partida multijugador local
@@ -43,11 +46,15 @@ public class AstuciaNaval {
     public void sigTurno(){
         if(this.jugadorEnTurno==this.jugador1){
             this.jugadorEnTurno=this.jugador2;
+            this.pan.cover();
             JOptionPane.showMessageDialog(null, "Turno jugador 2");
+            this.pan.uncover();
             this.pan.setTablero(2);
-        }else {
+        }else if(this.jugadorEnTurno==this.jugador2){
             this.jugadorEnTurno=this.jugador1;
+            this.pan.cover();
             JOptionPane.showMessageDialog(null, "Turno jugador 1");
+            this.pan.uncover();
             this.pan.setTablero(1);
         }
     }
@@ -60,10 +67,12 @@ public class AstuciaNaval {
     public boolean gameOver(){
         if(jugador1.flotaDestruida()){
             ganador=jugador2;
+            this.jugadorEnTurno=null;
             JOptionPane.showMessageDialog(null, "GANADOR JUGADOR 2");
             return true;
         }else if(jugador2.flotaDestruida()){
             ganador=jugador1;
+            this.jugadorEnTurno=null;
             JOptionPane.showMessageDialog(null, "GANADOR JUGADOR 1");
             return true;
         }
@@ -80,25 +89,44 @@ public class AstuciaNaval {
      */
     public Boolean hitSended(int i, int j, Jugador p){
         if(this.jugadorEnTurno==p){
+            Boolean r=null;
             if(p==jugador1){
-                boolean r = (jugador2.recibirDisparo(i, j));
-                if(gameOver()){
-                    JOptionPane.showMessageDialog(null, "SE ACABO");
-                }
-                if(!r){
-                    sigTurno();
-                }
-                return r;
-            }else {
-                boolean r = (jugador1.recibirDisparo(i, j));
-                if(gameOver()){
-                    JOptionPane.showMessageDialog(null, "SE ACABO");
-                }
-                if(!r){
-                    sigTurno();
-                }
-                return r;
+                r = (jugador2.recibirDisparo(i, j));
+            }else if(p==jugador2){
+                r = (jugador1.recibirDisparo(i, j));
             }
+            if(!r){
+                this.jugadorEnTurno=null;
+                ActionListener action = new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        if(e.getSource() instanceof Timer){
+                            Timer timer = (Timer) e.getSource();
+                            timer.stop();
+                            jugadorEnTurno=p;
+                            sigTurno();
+                        }
+                    }
+                };
+                Timer timer = new Timer (2000, action);
+                timer.start();
+            }else if(r){
+                ActionListener action = new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        if(e.getSource() instanceof Timer){
+                            Timer timer = (Timer) e.getSource();
+                            timer.stop();
+                            if(gameOver()){
+                                JOptionPane.showMessageDialog(null, "SE ACABO");
+                            }
+                        }
+                    }
+                };
+                Timer timer = new Timer (2000, action);
+                timer.start();
+            }
+            return r;
         }else{
             return null;
         }
