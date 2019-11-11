@@ -10,9 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
@@ -47,6 +50,7 @@ public class TableroTiro extends Tablero implements MouseListener{
      */
     @Override
     public void mouseClicked(MouseEvent me) {
+        System.out.println("Nepe");
         if(me.getComponent() instanceof CasillaTiro){
             CasillaTiro c = (CasillaTiro) me.getComponent();
             if(!c.itHasBeenShot()){
@@ -104,7 +108,7 @@ public class TableroTiro extends Tablero implements MouseListener{
             }else {
                 System.out.println("ÑIEEEEEEEEEE");
             }
-        }catch (Exception e)   {
+        }catch (IOException | LineUnavailableException | UnsupportedAudioFileException e)   {
 
         } 
     }

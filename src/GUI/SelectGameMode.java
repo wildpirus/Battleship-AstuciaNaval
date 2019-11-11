@@ -7,6 +7,11 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -98,8 +103,16 @@ public class SelectGameMode extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-        
+        //Placeholder
+        String ip = JOptionPane.showInputDialog("Ingrese la IP");
+        int sel = JOptionPane.showConfirmDialog(
+                null, "Está a punto de conectarse a internet, está de acuerdo=",
+                "Conexión a servidor", JOptionPane.YES_NO_OPTION
+        );
+        if (sel == 0) {
+            d.setFormF2();
+            
+        }
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
