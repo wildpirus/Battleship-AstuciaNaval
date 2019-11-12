@@ -119,6 +119,7 @@ public class AstuciaNaval {
                             timer.stop();
                             if(gameOver()){
                                 JOptionPane.showMessageDialog(null, "SE ACABO");
+                                pan.exit();
                             }
                         }
                     }

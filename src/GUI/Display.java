@@ -6,7 +6,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -24,9 +23,9 @@ import javax.swing.JPanel;
  * @author wildg
  */
 public class Display extends javax.swing.JFrame {
-    Clip c;
-    boolean soundSw;
-    JPanel co;
+    private Clip c;
+    private boolean soundSw;
+    private JPanel co;
     /**
      * Creates new form Display
      */
@@ -43,15 +42,22 @@ public class Display extends javax.swing.JFrame {
         this.setTitle("BattleShip");
         playBackgroundMusic();
         this.jLabel2.setIcon(new ImageIcon("src/sources/greyBG.png"));
-        Component comp = new Welcome(this);
-        this.jPanel1.add(comp);
-        comp.setVisible(true);
-        comp.setBounds(0, 0, this.jPanel1.getWidth(), this.jPanel1.getHeight());
+        Welcome w = new Welcome(this);
+        this.jPanel1.add(w);
+        w.setVisible(true);
+        w.setBounds(0, 0, this.jPanel1.getWidth(), this.jPanel1.getHeight());
         co = new JPanel();
         co.setBackground(Color.BLACK);
     }
 
-    
+    public void setHome(){
+        this.jPanel1.removeAll();
+        Welcome a = new Welcome(this);
+        this.jPanel1.add(a);
+        a.setBounds(0, 0, this.jPanel1.getSize().width, this.jPanel1.getSize().height);
+        a.init();
+        this.jPanel1.repaint();
+    }
     
     public void setSelectGM(){
         this.jPanel1.removeAll();
@@ -65,15 +71,6 @@ public class Display extends javax.swing.JFrame {
     public void setFormF(){
         this.jPanel1.removeAll();
         LocalGamePanel a = new LocalGamePanel(this);
-        this.jPanel1.add(a);
-        a.setBounds(0, 0, this.jPanel1.getSize().width, this.jPanel1.getSize().height);
-        a.init();
-        this.jPanel1.repaint();
-    }
-    
-    public void setFormF2() {
-        this.jPanel1.removeAll();
-        MultiGamePanel a = new MultiGamePanel(this);
         this.jPanel1.add(a);
         a.setBounds(0, 0, this.jPanel1.getSize().width, this.jPanel1.getSize().height);
         a.init();
@@ -94,9 +91,8 @@ public class Display extends javax.swing.JFrame {
                 c.start();
                 c.loop(Clip.LOOP_CONTINUOUSLY);
                 soundSw=true;
-                jLabel1.setIcon(new ImageIcon("src/sources/volume-up.png"));
             }else {
-                System.out.println("ÑIEEEEEEEEEE");
+                System.out.println("No hay archivo de música");
             }
         }catch (Exception e)   {
 
@@ -113,6 +109,20 @@ public class Display extends javax.swing.JFrame {
         this.repaint();
     }
     
+    public boolean getSoundSw(){
+        return this.soundSw;
+    }
+    
+    public void setBGSound(){
+        if(this.soundSw){
+            c.stop();
+            soundSw=false;
+        }else if(!this.soundSw){
+            c.start();
+            this.soundSw=true;
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,7 +133,6 @@ public class Display extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -133,47 +142,31 @@ public class Display extends javax.swing.JFrame {
 
         jLayeredPane1.setMinimumSize(new java.awt.Dimension(850, 570));
 
-        jLabel1.setBackground(java.awt.Color.orange);
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setMinimumSize(new java.awt.Dimension(850, 570));
         jPanel1.setOpaque(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 758, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 570, Short.MAX_VALUE)
         );
 
-        jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(44, 44, 44))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap(525, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -199,19 +192,6 @@ public class Display extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-        if(this.soundSw){
-            jLabel1.setIcon(new ImageIcon("src/sources/mute.png"));
-            c.stop();
-            this.soundSw=false;
-        }else {
-            jLabel1.setIcon(new ImageIcon("src/sources/volume-up.png"));
-            c.start();
-            this.soundSw=true;
-        }
-    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -249,7 +229,6 @@ public class Display extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
