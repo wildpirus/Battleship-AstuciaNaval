@@ -10,7 +10,14 @@ import battleship.Jugador;
 import battleship.TableroFlota;
 import battleship.TableroTiro;
 import java.awt.Dimension;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import server.ServerHandler;
 
 /**
  *
@@ -114,7 +121,6 @@ public class MultiGamePanel extends javax.swing.JPanel  {
         // TODO add your handling code here:
             if(jugador.colocarNaves()){
                 System.out.println("bien");
-                this.jLabel1.setText("Jugador 2");
                 this.jLayeredPane1.removeAll();
                 ii++;
                 this.jLabel2.setText("Tablero de tiro");
@@ -129,17 +135,30 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void init(){
-        initComponents();
-        jugador = new Jugador();
-        f1 = this.jugador.getMiFlota();
-        f1.setSize(new Dimension(500,500));
-        t1 = this.jugador.getTableroTiro();
-        t1.setSize(new Dimension(500,500));
-        this.jLabel1.setText("Jugador");
-        jLayeredPane1.add(f1,new Integer(0));
-        ii=0;
-        /*t1.setVisible(true);
-        t1.setOpaque(true);*/
+        try {
+            //Server Setup block
+            Socket s = new Socket("localhost", 14999);
+            DataInputStream input = new DataInputStream(s.getInputStream());
+            DataOutputStream output = new DataOutputStream(s.getOutputStream());
+            String nombre = JOptionPane.showInputDialog("Escriba su nombre");
+            ServerHandler sh = new ServerHandler(s, input, output, jugador, nombre, this);
+            JOptionPane.showMessageDialog(null, "Conexión exitosa!"); //Placeholder
+            
+            initComponents();
+            jugador = new Jugador();
+            f1 = this.jugador.getMiFlota();
+            f1.setSize(new Dimension(500,500));
+            t1 = this.jugador.getTableroTiro();
+            t1.setSize(new Dimension(500,500));
+            this.jLabel1.setText("Jugador");
+            jLayeredPane1.add(f1,new Integer(0));
+            ii=0;
+            
+            /*t1.setVisible(true);
+            t1.setOpaque(true);*/
+        } catch (IOException ex) {
+           JOptionPane.showMessageDialog(null, "Conexión al servidor fallida: El servidor ingresado no existe"); //Placeholder
+        }
     }
     
     public void setTablero(){

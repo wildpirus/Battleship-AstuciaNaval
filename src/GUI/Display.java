@@ -8,15 +8,21 @@ package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.io.DataInputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import server.ServerHandler;
 
 /**
  *
@@ -75,6 +81,23 @@ public class Display extends javax.swing.JFrame {
         a.setBounds(0, 0, this.jPanel1.getSize().width, this.jPanel1.getSize().height);
         a.init();
         this.jPanel1.repaint();
+    }
+    
+    public void setFormMulti(){
+        int sel = JOptionPane.showConfirmDialog(null, 
+                "Está a punto de conectarse a internet, Está seguro que desea continuar?",
+                "Conexión inminente", 
+                JOptionPane.YES_NO_OPTION);
+        if (sel == 0) {           
+            this.jPanel1.removeAll();
+            MultiGamePanel a = new MultiGamePanel(this);
+            this.jPanel1.add(a);
+            a.setBounds(0, 0, this.jPanel1.getSize().width, this.jPanel1.getSize().height);
+            a.init();
+            this.jPanel1.repaint();
+        }
+
+
     }
     
     public Dimension getPanelSize(){

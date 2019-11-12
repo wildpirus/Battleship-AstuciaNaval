@@ -5,6 +5,7 @@
  */
 package server;
 
+import GUI.MultiGamePanel;
 import battleship.Jugador;
 import battleship.Nave;
 import java.io.DataInputStream;
@@ -21,23 +22,24 @@ public class ServerHandler {
     private final DataInputStream input;
     private final DataOutputStream output;
     private final Jugador jugador;
+    private final MultiGamePanel panel;
+    private final String nombre;
 
-    public ServerHandler(Socket socket, DataInputStream input, DataOutputStream output, Jugador jugador) {
+    public ServerHandler(Socket socket, DataInputStream input, DataOutputStream output, Jugador jugador, String nombre, MultiGamePanel panel) {
         this.socket = socket;
         this.input = input;
         this.output = output;
         this.jugador = jugador;
+        this.panel = panel;
+        this.nombre = nombre;
     }
 
     
     
-    private Thread gameThread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            String serverResponse;
-            while(true) { //Esta condición debe cambiar
-                //Recibir mensaje del servidor, procesarlo, y hacer la acción correspondiente
-            }
+    private final Thread gameThread = new Thread(() -> {
+        String serverResponse;
+        while(true) { //Esta condición debe cambiar
+            //Recibir mensaje del servidor, procesarlo, y hacer la acción correspondiente
         }
     });
     
