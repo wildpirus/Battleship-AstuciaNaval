@@ -7,7 +7,6 @@ package server;
 
 import battleship.Jugador;
 import battleship.TableroFlota;
-import battleship.TableroTiro;
 import battleship.TipoFlota;
 
 /**
@@ -18,16 +17,29 @@ public class JugadorOnline extends Jugador{
 
     private final ServerHandler handler;
     private final TableroFlota miFlota;
-    private TableroTiro tableroTiro;
+    private final TableroTiroOnline tableroTiro;
+    private boolean inTurno;
     
     public JugadorOnline(ServerHandler handler){
         this.handler = handler;
         miFlota = new TableroFlota(this, TipoFlota.NORMAL);
+        tableroTiro = new TableroTiroOnline(this);
     }
     
-    
-    public boolean enviarDisparo() {
-        return true;
+    public void disparo(int i, int j) {
+        if (inTurno) {
+            handler.shoot(i,j);
+        }
     }
     
+    @Override
+    public TableroTiroOnline getTableroTiro() {
+        return tableroTiro;
+    }
+
+    void setInTurno() {
+        this.inTurno = true;
+    }
+    
+
 }

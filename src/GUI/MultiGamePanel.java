@@ -6,7 +6,6 @@
 package GUI;
 
 import battleship.AstuciaNaval;
-import battleship.Jugador;
 import battleship.TableroFlota;
 import battleship.TableroTiro;
 import java.awt.Dimension;
@@ -14,9 +13,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import server.JugadorOnline;
 import server.ServerHandler;
 
 /**
@@ -25,7 +23,7 @@ import server.ServerHandler;
  */
 public class MultiGamePanel extends javax.swing.JPanel  {
     
-    Jugador jugador;
+    JugadorOnline jugador;
     AstuciaNaval partida;
     Display d;
     TableroFlota f1;
@@ -145,7 +143,7 @@ public class MultiGamePanel extends javax.swing.JPanel  {
             JOptionPane.showMessageDialog(null, "Conexión exitosa!"); //Placeholder
             
             initComponents();
-            jugador = new Jugador();
+            jugador = new JugadorOnline(sh);
             f1 = this.jugador.getMiFlota();
             f1.setSize(new Dimension(500,500));
             t1 = this.jugador.getTableroTiro();

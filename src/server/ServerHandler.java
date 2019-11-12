@@ -10,7 +10,10 @@ import battleship.Jugador;
 import battleship.Nave;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -32,14 +35,27 @@ public class ServerHandler {
         this.jugador = jugador;
         this.panel = panel;
         this.nombre = nombre;
+        try {
+            output.writeUTF(nombre);
+        } catch (IOException ex) {
+            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     
     
-    private final Thread gameThread = new Thread(() -> {
-        String serverResponse;
-        while(true) { //Esta condición debe cambiar
-            //Recibir mensaje del servidor, procesarlo, y hacer la acción correspondiente
+    private final Thread gameThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            String serverResponse;            
+            while(true) { //Esta condición debe cambiar
+                try {
+                    serverResponse = input.readUTF();
+                    ServerHandler.this.interpretarRespuesta(serverResponse);
+                } catch (IOException ex) {
+                    Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     });
     
@@ -47,12 +63,53 @@ public class ServerHandler {
         
     }
     
-    public void hitSended(int i, int j) {
+    public void hitSent(int i, int j) {
         
     }
     
     public Nave hasHitDestroyed(int i, int j) {
         return null; //Debe cambiar
+    }
+
+    void shoot(int i, int j) {
+        try {
+            output.writeUTF("CLIENTE#DISPARO$" + i + "," + j);
+        } catch (IOException ex) {
+            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void interpretarRespuesta(String serverResponse) {
+        if (serverResponse.startsWith("SERVER#")) {
+            String comando = serverResponse.substring(7);
+            if (comando.startsWith("DISPARO")) {
+                int i, j;
+                i = Integer.parseInt(comando.substring(8, 9));
+                j = Integer.parseInt(comando.substring(10));
+                if (getHit(i, j)) {
+                    try {
+                        output.writeUTF("CLIENTE#CONFIRMHIT$" + i + "," + j);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    try {
+                        output.writeUTF("CLIENTE#DENYHIT$" + i + "," + j);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else if(comando.startsWith("INICIOTURNO")) {
+                JugadorOnline j = (JugadorOnline) this.jugador;
+                j.setInTurno();
+            } else if (comando.contains("HIT")){
+                
+            }
+        }
+    }
+    
+    private Boolean getHit(int i, int j) {
+        return jugador.recibirDisparo(i, j);
     }
     
 }
