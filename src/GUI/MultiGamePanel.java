@@ -29,6 +29,7 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     TableroFlota f1;
     TableroTiro  t1;
     int ii;
+    ServerHandler sh;
     
     public MultiGamePanel(Display d) {
         initComponents();
@@ -124,6 +125,7 @@ public class MultiGamePanel extends javax.swing.JPanel  {
                 this.jLabel2.setText("Tablero de tiro");
                 this.jButton1.setVisible(false);
                 setTablero();
+                sh.setReady();
             }else {
                 System.out.println("mal");
                 JOptionPane.showMessageDialog(null, "Mal");
@@ -139,11 +141,12 @@ public class MultiGamePanel extends javax.swing.JPanel  {
             DataInputStream input = new DataInputStream(s.getInputStream());
             DataOutputStream output = new DataOutputStream(s.getOutputStream());
             String nombre = JOptionPane.showInputDialog("Escriba su nombre");
-            ServerHandler sh = new ServerHandler(s, input, output, jugador, nombre, this);
+            jugador = new JugadorOnline();
+            sh = new ServerHandler(s, input, output, jugador, nombre, this);
             JOptionPane.showMessageDialog(null, "Conexión exitosa!"); //Placeholder
             
             initComponents();
-            jugador = new JugadorOnline(sh);
+            jugador.setHandler(sh);
             f1 = this.jugador.getMiFlota();
             f1.setSize(new Dimension(500,500));
             t1 = this.jugador.getTableroTiro();

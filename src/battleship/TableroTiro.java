@@ -109,4 +109,7 @@ public class TableroTiro extends Tablero implements MouseListener{
         } 
     }
     
+    public CasillaTiro[][] getCasillas() {
+        return casillas;
+    }
 }

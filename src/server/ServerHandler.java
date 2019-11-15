@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -40,6 +41,7 @@ public class ServerHandler {
         } catch (IOException ex) {
             Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        gameThread.start();
     }
 
     
@@ -52,6 +54,7 @@ public class ServerHandler {
                 try {
                     serverResponse = input.readUTF();
                     ServerHandler.this.interpretarRespuesta(serverResponse);
+                    System.out.println(serverResponse);
                 } catch (IOException ex) {
                     Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -102,14 +105,44 @@ public class ServerHandler {
             } else if(comando.startsWith("INICIOTURNO")) {
                 JugadorOnline j = (JugadorOnline) this.jugador;
                 j.setInTurno();
+                JOptionPane.showMessageDialog(null, "Es tu turno!");
             } else if (comando.contains("HIT")){
-                
+                JugadorOnline jug = (JugadorOnline) jugador;
+                if (comando.contains("CONFIRM")) {
+                    
+                    int i = Integer.parseInt(comando.substring(11,12));
+                    int j = Integer.parseInt(comando.substring(13));
+                    jug.updateHit(i, j, true);
+                    JOptionPane.showMessageDialog(null, "LE DISTE WE");
+                } else {
+                    int i = Integer.parseInt(comando.substring(8,9));
+                    int j = Integer.parseInt(comando.substring(10));
+                    jug.updateHit(i, j, false);
+                    jug.finTurno();
+                    JOptionPane.showMessageDialog(null, "NO LE DISTE WE");
+                }
             }
         }
     }
     
     private Boolean getHit(int i, int j) {
         return jugador.recibirDisparo(i, j);
+    }
+
+    public void setReady() {
+        try {
+            output.writeUTF("CLIENTE#ISREADY");
+        } catch (IOException ex) {
+            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void declaraFinTurno() {
+        try {
+            output.writeUTF("CLIENTE#FINTURNO");
+        } catch (IOException ex) {
+            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

@@ -8,6 +8,8 @@ package server;
 import battleship.CasillaTiro;
 import battleship.TableroTiro;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,12 +23,29 @@ public class TableroTiroOnline extends TableroTiro{
     
     @Override
     public void mouseClicked(MouseEvent me) {
-        if (me.getComponent() instanceof CasillaTiro) {
-            CasillaTiro c = (CasillaTiro) me.getComponent();
-            if (!c.itHasBeenShot()) {
-                JugadorOnline j = (JugadorOnline) this.jugador;
-                j.disparo(c.getI(), c.getJ());
+        JugadorOnline j = (JugadorOnline) jugador;
+        if (j.inTurno()) {
+            if (me.getComponent() instanceof CasillaTiro) {
+                CasillaTiro c = (CasillaTiro) me.getComponent();
+                if (!c.itHasBeenShot()) {
+                    c.setShot();
+                    j.disparo(c.getI(), c.getJ());
+                    System.out.println("Disparaste en: " + c.getI() + ", " + c.getJ());
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No es tu turno!");
+        }
+    }
+    
+    public void showMark(int i, int j, boolean hit) {
+        CasillaTiro[][] casillas = getCasillas();
+        if (hit) {
+            System.out.println("Hit");
+            casillas[i][j].setIcon(new ImageIcon("src/sources/mark.png"));
+        } else {
+            System.out.println("Fail");
+            casillas[i][j].setIcon(new ImageIcon("src/sources/miss.png"));
         }
     }
     

@@ -8,12 +8,8 @@ package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
@@ -22,7 +18,6 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import server.ServerHandler;
 
 /**
  *
