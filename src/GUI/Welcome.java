@@ -16,9 +16,6 @@ import tipografias.Fuente;
  */
 public class Welcome extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Welcome
-     */
     Display d;
 
     public Welcome(Display d) {
@@ -27,6 +24,9 @@ public class Welcome extends javax.swing.JPanel {
         jLabel4.setIcon(new ImageIcon("src/sources/fo.gif"));
     }
     
+    /**
+     * Creates new form Welcome
+     */
     public Welcome() {
         initComponents();
     }

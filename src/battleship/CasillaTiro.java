@@ -26,9 +26,7 @@ public class CasillaTiro extends JLabel{
     
     public void setState(boolean b){
         this.hasBeenShot=true;
-        if(b){
-            this.setIcon(new ImageIcon("src/sources/mark.png"));
-        }else {
+        if(!b){
             this.setIcon(new ImageIcon("src/sources/miss.png"));
         }
     }
@@ -43,10 +41,6 @@ public class CasillaTiro extends JLabel{
 
     public boolean itHasBeenShot() {
         return hasBeenShot;
-    }
-
-    public void setShot() {
-        this.hasBeenShot = true;
     }
     
 }

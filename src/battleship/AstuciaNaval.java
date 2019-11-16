@@ -8,7 +8,6 @@ package battleship;
 import GUI.LocalGamePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -46,15 +45,11 @@ public class AstuciaNaval {
     public void sigTurno(){
         if(this.jugadorEnTurno==this.jugador1){
             this.jugadorEnTurno=this.jugador2;
-            this.pan.cover();
-            JOptionPane.showMessageDialog(null, "Turno jugador 2");
-            this.pan.uncover();
+            this.pan.showDialog("Turno jugador 2");
             this.pan.setTablero(2);
         }else if(this.jugadorEnTurno==this.jugador2){
             this.jugadorEnTurno=this.jugador1;
-            this.pan.cover();
-            JOptionPane.showMessageDialog(null, "Turno jugador 1");
-            this.pan.uncover();
+            this.pan.showDialog("Turno jugador 1");
             this.pan.setTablero(1);
         }
     }
@@ -68,12 +63,12 @@ public class AstuciaNaval {
         if(jugador1.flotaDestruida()){
             ganador=jugador2;
             this.jugadorEnTurno=null;
-            JOptionPane.showMessageDialog(null, "GANADOR JUGADOR 2");
+            this.pan.showDialog("GANADOR JUGADOR 2");
             return true;
         }else if(jugador2.flotaDestruida()){
             ganador=jugador1;
             this.jugadorEnTurno=null;
-            JOptionPane.showMessageDialog(null, "GANADOR JUGADOR 1");
+            this.pan.showDialog("GANADOR JUGADOR 1");
             return true;
         }
         return false;
@@ -118,7 +113,6 @@ public class AstuciaNaval {
                             Timer timer = (Timer) e.getSource();
                             timer.stop();
                             if(gameOver()){
-                                JOptionPane.showMessageDialog(null, "SE ACABO");
                                 pan.exit();
                             }
                         }

@@ -15,7 +15,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 /**
@@ -62,6 +61,7 @@ public class LocalGamePanel extends javax.swing.JPanel  {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setOpaque(false);
 
@@ -127,6 +127,9 @@ public class LocalGamePanel extends javax.swing.JPanel  {
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/radar.gif"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,11 +148,16 @@ public class LocalGamePanel extends javax.swing.JPanel  {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,12 +169,17 @@ public class LocalGamePanel extends javax.swing.JPanel  {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(bgSoundLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(bgSoundLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -177,15 +190,15 @@ public class LocalGamePanel extends javax.swing.JPanel  {
             if(jugador1.colocarNaves()){
                 System.out.println("bien");
                 cover();
-                JOptionPane.showMessageDialog(null, "Organiza tu flota Jugador 2");
+                Display.showMessageDialog(d,"Organiza tu flota Jugador 2");
                 uncover();
                 this.jLabel1.setText("Jugador 2");
                 this.jLayeredPane1.removeAll();
                 jLayeredPane1.add(f2,new Integer(0));
                 ii++;
             }else {
-                System.out.println("mal");
-                JOptionPane.showMessageDialog(null, "Mal");
+                System.out.println("Formación de flota no válida");
+                Display.showMessageDialog(d,"Formación de flota no válida");
             }
         }else if(ii==1){
             if(jugador2.colocarNaves()){
@@ -193,13 +206,13 @@ public class LocalGamePanel extends javax.swing.JPanel  {
                 this.jLayeredPane1.removeAll();
                 ii++;
             }else {
-                System.out.println("mal");
-                JOptionPane.showMessageDialog(null, "Mal");
+                System.out.println("Formación de flota no válida");
+                Display.showMessageDialog(d,"Formación de flota no válida");
             }
         }
         if(ii==2){
             cover();
-            JOptionPane.showMessageDialog(null, "Turno jugador 1");
+            Display.showMessageDialog(d,"Turno jugador 1");
             uncover();
             this.repaint();
             this.jLabel2.setText("Tablero de tiro");
@@ -221,12 +234,11 @@ public class LocalGamePanel extends javax.swing.JPanel  {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         cover();
-        int se = JOptionPane.showConfirmDialog(this, "Esta seguro que desea salir");
+        int se = Display.showConfirmationDialog(d,"Esta seguro que desea salir?");
         uncover();
         if(se==0){
             exit();
         }
-        
     }//GEN-LAST:event_jLabel3MouseClicked
 
     public void init(){
@@ -245,10 +257,8 @@ public class LocalGamePanel extends javax.swing.JPanel  {
         jLayeredPane1.add(f1,new Integer(0));
         ii=0;
         cover();
-        JOptionPane.showMessageDialog(null, "Organiza tu flota Jugador 1");
+        Display.showMessageDialog(d,"Organiza tu flota Jugador 1");
         uncover();
-        /*t1.setVisible(true);
-        t1.setOpaque(true);*/
         jPanel1.setLayout(new GridLayout(1,10));
         jPanel1.setOpaque(false);
         JLabel[] u1 = new JLabel[10];
@@ -258,7 +268,7 @@ public class LocalGamePanel extends javax.swing.JPanel  {
             u1[i].setHorizontalAlignment(SwingConstants.CENTER);
             u1[i].setText(Integer.toString(i+1));
             u1[i].setForeground(Color.GREEN);
-            u1[i].setFont(new java.awt.Font("Tahoma", 1, 14));
+            u1[i].setFont(Fuente.EuroStyle.getFuente(0, 14));
         }
         jPanel2.setLayout(new GridLayout(10,1));
         jPanel2.setOpaque(false);
@@ -269,7 +279,7 @@ public class LocalGamePanel extends javax.swing.JPanel  {
             u2[i].setHorizontalAlignment(SwingConstants.CENTER);
             u2[i].setText(Character.toString((char)(i+65)));
             u2[i].setForeground(Color.GREEN);
-            u2[i].setFont(new java.awt.Font("Tahoma", 1, 14));
+            u2[i].setFont(Fuente.EuroStyle.getFuente(0, 14));
         }
         if(this.d.getSoundSw()){
             bgSoundLabel.setIcon(new ImageIcon("src/sources/volume-up.png"));
@@ -291,15 +301,23 @@ public class LocalGamePanel extends javax.swing.JPanel  {
     }
     
     public void cover(){
+        jLabel4.setVisible(false);
         this.d.cover();
     }
     
     public void uncover(){
         this.d.uncover();
+        jLabel4.setVisible(true);
     }
     
     public void exit(){
         d.setSelectGM();
+    }
+    
+    public void showDialog(String mensaje){
+        cover();
+        Display.showMessageDialog(d,mensaje);
+        uncover();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -308,6 +326,7 @@ public class LocalGamePanel extends javax.swing.JPanel  {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

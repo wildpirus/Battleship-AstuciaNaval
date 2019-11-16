@@ -253,7 +253,8 @@ public class SelectGameMode extends javax.swing.JPanel {
     }//GEN-LAST:event_bgSoundLabelMouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        d.setFormMulti();
+        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered

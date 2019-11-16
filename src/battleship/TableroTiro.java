@@ -60,15 +60,14 @@ public class TableroTiro extends Tablero implements MouseListener{
                                 if(e.getSource() instanceof Timer){
                                     Timer timer = (Timer) e.getSource();
                                     timer.stop();
-                                    c.setState(b);
+                                    c.setIcon(new ImageIcon("src/sources/mark.png"));
                                 }
                             }
                         };
                         Timer timer = new Timer (2000, action);
                         timer.start();
-                    }else {
-                        c.setState(b);
                     }
+                    c.setState(b);
                     playSoundExplo(b);
                 }
             }
@@ -109,7 +108,4 @@ public class TableroTiro extends Tablero implements MouseListener{
         } 
     }
     
-    public CasillaTiro[][] getCasillas() {
-        return casillas;
-    }
 }

@@ -6,7 +6,9 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,8 +17,10 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 /**
@@ -26,7 +30,7 @@ import javax.swing.JPanel;
 public class Display extends javax.swing.JFrame {
     private Clip c;
     private boolean soundSw;
-    private JPanel co;
+    private final JPanel co;
     /**
      * Creates new form Display
      */
@@ -78,28 +82,11 @@ public class Display extends javax.swing.JFrame {
         this.jPanel1.repaint();
     }
     
-    public void setFormMulti(){
-        int sel = JOptionPane.showConfirmDialog(null, 
-                "Está a punto de conectarse a internet, Está seguro que desea continuar?",
-                "Conexión inminente", 
-                JOptionPane.YES_NO_OPTION);
-        if (sel == 0) {           
-            this.jPanel1.removeAll();
-            MultiGamePanel a = new MultiGamePanel(this);
-            this.jPanel1.add(a);
-            a.setBounds(0, 0, this.jPanel1.getSize().width, this.jPanel1.getSize().height);
-            a.init();
-            this.jPanel1.repaint();
-        }
-
-
-    }
-    
     public Dimension getPanelSize(){
         return this.jPanel1.getSize();
     }
     
-    public void playBackgroundMusic(){
+    public final void playBackgroundMusic(){
         try {
             File m = new File("src/sources/Sounds/Background.wav");
             if(m.exists()){
@@ -112,7 +99,7 @@ public class Display extends javax.swing.JFrame {
             }else {
                 System.out.println("No hay archivo de música");
             }
-        }catch (Exception e)   {
+        }catch (IOException | LineUnavailableException | UnsupportedAudioFileException e)   {
 
         } 
     }
@@ -139,6 +126,33 @@ public class Display extends javax.swing.JFrame {
             c.start();
             this.soundSw=true;
         }
+    }
+    
+    public static void showMessageDialog(Component parentComponent, String mensaje){
+        Frame toUse = null;
+        JDialog dialog = new JDialog(toUse, "");
+        dialog.setUndecorated(true);
+        Pane p = new Pane(dialog,mensaje);
+        dialog.getContentPane().add(p);
+        dialog.setModal(true);
+        dialog.setResizable(false);
+        dialog.pack();
+        dialog.setLocationRelativeTo(parentComponent);
+        dialog.setVisible(true);
+    }
+    
+    public static int showConfirmationDialog(Component parentComponent, String mensaje){
+        Frame toUse = null;
+        JDialog dialog = new JDialog(toUse, "");
+        dialog.setUndecorated(true);
+        PPane p = new PPane(dialog,mensaje);
+        dialog.getContentPane().add(p);
+        dialog.setModal(true);
+        dialog.setResizable(false);
+        dialog.pack();
+        dialog.setLocationRelativeTo(parentComponent);
+        dialog.setVisible(true);
+        return p.getDe();
     }
     
     /**
@@ -227,22 +241,16 @@ public class Display extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Display.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Display.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Display.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Display.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Display().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Display().setVisible(true);
         });
     }
 
