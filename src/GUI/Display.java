@@ -82,6 +82,20 @@ public class Display extends javax.swing.JFrame {
         this.jPanel1.repaint();
     }
     
+    public void setFormMulti(){
+        int sel = Display.showConfirmationDialog(this, "Está a punto de conectarse a internet, Está seguro que desea continuar?");        
+        if (sel == 0) {           
+            this.jPanel1.removeAll();
+            MultiGamePanel a = new MultiGamePanel(this);
+            this.jPanel1.add(a);
+            a.setBounds(0, 0, this.jPanel1.getSize().width, this.jPanel1.getSize().height);
+            a.init();
+            this.jPanel1.repaint();
+        }
+
+
+    }
+    
     public Dimension getPanelSize(){
         return this.jPanel1.getSize();
     }

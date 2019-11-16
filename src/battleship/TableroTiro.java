@@ -41,6 +41,10 @@ public class TableroTiro extends Tablero implements MouseListener{
         this.naves.add(nave);
         this.add(nave, 1);
     }
+    
+    public CasillaTiro[][] getCasillas() {
+        return casillas;
+    }
 
     /**
      * Envia disparo.
