@@ -45,6 +45,7 @@ public class TableroTiroOnline extends TableroTiro{
         CasillaTiro[][] casillas = getCasillas();
         if (hit) {
             System.out.println("Hit");
+            casillas[i][j].setIcon(new ImageIcon("src/sources/explo.gif"));
             ActionListener action = new ActionListener(){
                             @Override
                             public void actionPerformed(ActionEvent e){

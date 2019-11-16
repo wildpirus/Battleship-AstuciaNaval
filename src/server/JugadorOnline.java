@@ -20,11 +20,17 @@ public class JugadorOnline extends Jugador{
     private final TableroFlota miFlota;
     private final TableroTiroOnline tableroTiro;
     private boolean inTurno;
+    private boolean inGame;
     
     public JugadorOnline(){
         miFlota = new TableroFlota(this, TipoFlota.NORMAL);
         tableroTiro = new TableroTiroOnline(this);
         inTurno = false;
+        inGame = true;
+    }
+
+    public boolean isInGame() {
+        return inGame;
     }
     
     public void disparo(int i, int j) {
@@ -59,5 +65,9 @@ public class JugadorOnline extends Jugador{
         JOptionPane.showMessageDialog(null, "Has fallado, se ha terminado tu turno :v"); //PlaceHolder
         this.inTurno = false;
         handler.declaraFinTurno();
+    }
+
+    void finishGame() {
+        this.inGame = false;
     }
 }

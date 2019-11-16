@@ -151,12 +151,13 @@ public class MultiGamePanel extends javax.swing.JPanel  {
             f1.setSize(new Dimension(500,500));
             t1 = this.jugador.getTableroTiro();
             t1.setSize(new Dimension(500,500));
-            this.jLabel1.setText("Jugador");
+            this.jLabel1.setText(nombre);
             jLayeredPane1.add(f1,new Integer(0));
             ii=0;
             
             /*t1.setVisible(true);
             t1.setOpaque(true);*/
+            jLayeredPane1.repaint();
         } catch (IOException ex) {
            JOptionPane.showMessageDialog(null, "Conexión al servidor fallida: El servidor ingresado no existe"); //Placeholder
         }
@@ -183,4 +184,8 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     // End of variables declaration//GEN-END:variables
+
+    public void setNombre(String nombre) {
+        jLabel1.setText(nombre);
+    }
 }

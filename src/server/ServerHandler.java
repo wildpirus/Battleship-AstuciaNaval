@@ -41,6 +41,7 @@ public class ServerHandler {
         } catch (IOException ex) {
             Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        panel.setNombre(nombre);
         gameThread.start();
     }
 
@@ -50,7 +51,8 @@ public class ServerHandler {
         @Override
         public void run() {
             String serverResponse;            
-            while(true) { //Esta condición debe cambiar
+            JugadorOnline jug = (JugadorOnline) jugador;
+            while(jug.isInGame()) { //Esta condición debe cambiar
                 try {
                     serverResponse = input.readUTF();
                     ServerHandler.this.interpretarRespuesta(serverResponse);
@@ -61,10 +63,6 @@ public class ServerHandler {
             }
         }
     });
-    
-    public void sigTurno() {
-        
-    }
     
     public void hitSent(int i, int j) {
         
@@ -92,6 +90,9 @@ public class ServerHandler {
                 if (getHit(i, j)) {
                     try {
                         output.writeUTF("CLIENTE#CONFIRMHIT$" + i + "," + j);
+                        if (this.jugador.flotaDestruida()) {
+                            output.writeUTF("CLIENTE#DERROTA");
+                        }
                     } catch (IOException ex) {
                         Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -119,6 +120,14 @@ public class ServerHandler {
                     jug.updateHit(i, j, false);
                     jug.finTurno();
                 }
+            } else if(comando.equals("VICTORIA")) {
+                JOptionPane.showMessageDialog(null, "Felicidades! Ganaste!!!");
+                JugadorOnline j = (JugadorOnline) jugador;
+                j.finishGame();
+            } else if(comando.equals("DEFAULT")) {
+                JOptionPane.showMessageDialog(null, "El oponente se ha desconectado, ganas por default");
+                JugadorOnline j = (JugadorOnline) jugador;
+                j.finishGame();
             }
         }
     }
