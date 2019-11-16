@@ -42,5 +42,9 @@ public class CasillaTiro extends JLabel{
     public boolean itHasBeenShot() {
         return hasBeenShot;
     }
+
+    public void setShot() {
+        this.hasBeenShot = true;
+    }
     
 }
