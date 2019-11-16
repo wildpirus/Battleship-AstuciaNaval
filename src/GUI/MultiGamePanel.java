@@ -145,7 +145,7 @@ public class MultiGamePanel extends javax.swing.JPanel  {
             sh = new ServerHandler(s, input, output, jugador, nombre, this);
             JOptionPane.showMessageDialog(null, "Conexión exitosa!"); //Placeholder
             
-            initComponents();
+            
             jugador.setHandler(sh);
             f1 = this.jugador.getMiFlota();
             f1.setSize(new Dimension(500,500));
