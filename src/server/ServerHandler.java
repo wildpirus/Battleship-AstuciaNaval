@@ -113,13 +113,11 @@ public class ServerHandler {
                     int i = Integer.parseInt(comando.substring(11,12));
                     int j = Integer.parseInt(comando.substring(13));
                     jug.updateHit(i, j, true);
-                    JOptionPane.showMessageDialog(null, "LE DISTE WE");
                 } else {
                     int i = Integer.parseInt(comando.substring(8,9));
                     int j = Integer.parseInt(comando.substring(10));
                     jug.updateHit(i, j, false);
                     jug.finTurno();
-                    JOptionPane.showMessageDialog(null, "NO LE DISTE WE");
                 }
             }
         }

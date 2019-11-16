@@ -8,6 +8,7 @@ package battleship;
 import java.awt.Point;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  * Clase para una casilla en un TableroFlota. 
@@ -35,10 +36,13 @@ public class CasillaFlota extends JLabel{
         if(nave!=null){
             this.setIcon(new ImageIcon("src/sources/mark.png"));
             nave.isHit(new Point(i,j));
+            JOptionPane.showMessageDialog(null, "Le han dado a tu flota en: " + i + ", " + j);
             return true;
         }else {
             this.setIcon(new ImageIcon("src/sources/miss.png"));
+            JOptionPane.showMessageDialog(null, "El enemigo ha fallado un disparo en: " + i + ", " + j);
             return false;
+            
         }
     }
     
