@@ -137,7 +137,8 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     public void init(){
         try {
             //Server Setup block
-            Socket s = new Socket("localhost", 14999);
+            String serverIP = JOptionPane.showInputDialog("Ingrese la IP del servidor");
+            Socket s = new Socket(serverIP, 14999);
             DataInputStream input = new DataInputStream(s.getInputStream());
             DataOutputStream output = new DataOutputStream(s.getOutputStream());
             String nombre = JOptionPane.showInputDialog("Escriba su nombre");
@@ -159,7 +160,8 @@ public class MultiGamePanel extends javax.swing.JPanel  {
             t1.setOpaque(true);*/
             jLayeredPane1.repaint();
         } catch (IOException ex) {
-           JOptionPane.showMessageDialog(null, "Conexión al servidor fallida: El servidor ingresado no existe"); //Placeholder
+           Display.showMessageDialog(null, "Conexión al servidor fallida: El servidor ingresado no existe"); //Placeholder
+           d.setSelectGM();
         }
     }
     
