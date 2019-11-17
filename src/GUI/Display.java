@@ -169,6 +169,20 @@ public class Display extends javax.swing.JFrame {
         return p.getDe();
     }
     
+    public static String showInputDialog(Component parentComponent, String mensaje){
+        Frame toUse = null;
+        JDialog dialog = new JDialog(toUse, "");
+        dialog.setUndecorated(true);
+        PInputPane p = new PInputPane(dialog,mensaje);
+        dialog.getContentPane().add(p);
+        dialog.setModal(true);
+        dialog.setResizable(false);
+        dialog.pack();
+        dialog.setLocationRelativeTo(parentComponent);
+        dialog.setVisible(true);
+        return p.getDe();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
