@@ -4,19 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/server/TableroTiroOnline.java</file>
-            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/battleship/TableroTiro.java</file>
-            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/battleship/CasillaFlota.java</file>
-            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/server/JugadorOnline.java</file>
-            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/server/ServerHandler.java</file>
-            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/battleship/TableroFlota.java</file>
-            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/GUI/PPane.java</file>
-            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/GUI/SelectGameMode.java</file>
-            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/GUI/Pane.java</file>
             <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/battleship/Jugador.java</file>
             <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/GUI/Display.java</file>
+            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/server/JugadorOnline.java</file>
+            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/server/ServerHandler.java</file>
             <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/GUI/MultiGamePanel.java</file>
             <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/battleship/CasillaTiro.java</file>
             <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/battleship/Tablero.java</file>
+            <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/battleship/TableroFlota.java</file>
             <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/battleship/AstuciaNaval.java</file>
             <file>file:/C:/Users/Guach/Documents/NetBeansProjects/Battleship-AstuciaNaval/src/GUI/LocalGamePanel.java</file>
         </group>

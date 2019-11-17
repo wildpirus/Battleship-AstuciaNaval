@@ -151,5 +151,9 @@ public class ServerHandler {
             Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    void exit() {
+        panel.exit();
+    }
     
 }

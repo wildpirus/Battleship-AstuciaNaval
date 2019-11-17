@@ -69,5 +69,6 @@ public class JugadorOnline extends Jugador{
 
     void finishGame() {
         this.inGame = false;
+        handler.exit();
     }
 }

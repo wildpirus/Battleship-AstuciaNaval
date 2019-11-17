@@ -188,4 +188,8 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     public void setNombre(String nombre) {
         jLabel1.setText(nombre);
     }
+    
+    public void exit() {
+        d.setSelectGM();
+    }
 }
