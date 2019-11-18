@@ -15,7 +15,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import server.JugadorOnline;
 
 /**
- * Clase para un jugador en una partida
+ * Clase para un jugador en una partida.
  * @author wildg
  */
 public class Jugador {
@@ -113,6 +113,10 @@ public class Jugador {
         return tableroTiro;
     }
     
+    /**
+     * Método para reproducir el sonido de disparo.
+     * @param b boolean
+     */
     public void playSoundExplo(boolean b){
         Clip c;
         try {

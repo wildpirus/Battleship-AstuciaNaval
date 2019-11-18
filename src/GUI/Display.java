@@ -24,15 +24,16 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 /**
- *
+ * Clase para el frame donde se visualizará la interfaz del juego.
  * @author wildg
  */
 public class Display extends javax.swing.JFrame {
     private Clip c;
     private boolean soundSw;
     private final JPanel co;
+    
     /**
-     * Creates new form Display
+     * Crea nuevo frame te tipo Display.
      */
     public Display() {
         try {
@@ -54,7 +55,10 @@ public class Display extends javax.swing.JFrame {
         co = new JPanel();
         co.setBackground(Color.BLACK);
     }
-
+    
+    /**
+     * Hace visible el panel principal (Home) del juego.
+     */
     public void setHome(){
         this.jPanel1.removeAll();
         Welcome a = new Welcome(this);
@@ -64,6 +68,9 @@ public class Display extends javax.swing.JFrame {
         this.jPanel1.repaint();
     }
     
+    /**
+     * Hace visible el panel para seleccionar el modo de juego que se desa jugar.
+     */
     public void setSelectGM(){
         this.jPanel1.removeAll();
         SelectGameMode a = new SelectGameMode(this);
@@ -73,6 +80,9 @@ public class Display extends javax.swing.JFrame {
         this.jPanel1.repaint();
     }
     
+    /**
+     * Hace visible el panel para una partida local.
+     */
     public void setFormF(){
         this.jPanel1.removeAll();
         LocalGamePanel a = new LocalGamePanel(this);
@@ -82,6 +92,9 @@ public class Display extends javax.swing.JFrame {
         this.jPanel1.repaint();
     }
     
+    /**
+     * Hace visible el panel para una partida multijugador local.
+     */
     public void setFormMulti(){
         int sel = Display.showConfirmationDialog(this, "Está a punto de conectarse a internet, Está seguro que desea continuar?");        
         if (sel == 0) {           
@@ -96,10 +109,17 @@ public class Display extends javax.swing.JFrame {
 
     }
     
+    /**
+     * Función que retorna el tamaño del panel en el Frame.
+     * @return Dimension con el tamaño del panel en el frame.
+     */
     public Dimension getPanelSize(){
         return this.jPanel1.getSize();
     }
     
+    /**
+     * Método para iniciar la reproducción de la música de fondo.
+     */
     public final void playBackgroundMusic(){
         try {
             File m = new File("src/sources/Sounds/Background.wav");
@@ -118,20 +138,35 @@ public class Display extends javax.swing.JFrame {
         } 
     }
     
+    /**
+     * Método que añade un panel negro al frame del juego para cubrir los tableros.  
+     */
     public void cover(){
         this.jLayeredPane1.add(co, 2);
         co.setSize(this.jLayeredPane1.getSize());
     }
     
+    
+    /**
+     * Método que quita el panel negro agregado al frame del juego para cubrir 
+     * los tableros.  
+     */
     public void uncover(){
         this.jLayeredPane1.remove(co);
         this.repaint();
     }
     
+    /**
+     * Función para determinar si la musica de fondo se está reproduciendo.
+     * @return boolean true si se está reproduciendo, falso si no.
+     */
     public boolean getSoundSw(){
         return this.soundSw;
     }
     
+    /**
+     * Método para reproducir o detener la música de fondo.
+     */
     public void setBGSound(){
         if(this.soundSw){
             c.stop();
@@ -142,6 +177,12 @@ public class Display extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Método que desplega una ventana emergente para comunicarle un mensaje 
+     * al usuario.
+     * @param parentComponent Component con el que se alineará la ventana.
+     * @param mensaje String que se va a mostrar
+     */
     public static void showMessageDialog(Component parentComponent, String mensaje){
         Frame toUse = null;
         JDialog dialog = new JDialog(toUse, "");
@@ -155,6 +196,13 @@ public class Display extends javax.swing.JFrame {
         dialog.setVisible(true);
     }
     
+    /**
+     * Función que desplega una ventana emergente para el usuario confirme o 
+     * niegue una pregunta.
+     * @param parentComponent Component con el que se alineará la ventana.
+     * @param mensaje String que se va a mostrar.
+     * @return int 0 si acepta, 1 si no.
+     */
     public static int showConfirmationDialog(Component parentComponent, String mensaje){
         Frame toUse = null;
         JDialog dialog = new JDialog(toUse, "");
@@ -169,6 +217,13 @@ public class Display extends javax.swing.JFrame {
         return p.getDe();
     }
     
+    /**
+     * Función que desplega una ventana emergente para que el ingrese un 
+     * dato de tipo String usuario.
+     * @param parentComponent Component con el que se alineará la ventana.
+     * @param mensaje String que se va a mostrar
+     * @return String con la cadena que ingresó el usuario.
+     */
     public static String showInputDialog(Component parentComponent, String mensaje){
         Frame toUse = null;
         JDialog dialog = new JDialog(toUse, "");
@@ -254,7 +309,8 @@ public class Display extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * @param args the command line arguments
+     * Main para iniciar el juego.
+     * @param args the command line arguments.
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

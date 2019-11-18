@@ -11,13 +11,17 @@ import javax.swing.ImageIcon;
 import tipografias.Fuente;
 
 /**
- *
+ * Clase que define panel principal (Home) del juego.
  * @author wildg
  */
 public class Welcome extends javax.swing.JPanel {
 
     Display d;
-
+    
+    /**
+     * Crea  panel principal (Home) del juego.
+     * @param d Display
+     */
     public Welcome(Display d) {
         initComponents();
         this.d = d;
@@ -25,12 +29,15 @@ public class Welcome extends javax.swing.JPanel {
     }
     
     /**
-     * Creates new form Welcome
+     * Crea panel principal (Home) del juego.
      */
     public Welcome() {
         initComponents();
     }
     
+    /**
+     * Método para inicializar los componentes del panel.
+     */
     public void init(){
         initComponents();
         if(this.d.getSoundSw()){
@@ -205,12 +212,20 @@ public class Welcome extends javax.swing.JPanel {
         }
         this.d.setBGSound();
     }//GEN-LAST:event_bgSoundLabelMouseClicked
-
+    
+    /**
+     * Metodo para cambiar color de un componente.
+     * @param c Componente al qe se le cabiará el color.
+     */
     public void mEn(Component c){
         c.setBackground(Color.BLACK);
         c.setForeground(Color.white);
     }
     
+    /**
+     * Metodo para cambiar color de un componente.
+     * @param c Componente al qe se le cabiará el color.
+     */
     public void mEx(Component c){
         c.setBackground(Color.CYAN);
         c.setForeground(Color.BLACK);

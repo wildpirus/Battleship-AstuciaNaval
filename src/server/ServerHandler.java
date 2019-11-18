@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 
 /**
- *
+ * Clase que controla una partida de multijugador online.
  * @author Guacha
  */
 public class ServerHandler {
@@ -29,6 +29,15 @@ public class ServerHandler {
     private final MultiGamePanel panel;
     private final String nombre;
 
+    /**
+     * Constructor.
+     * @param socket Socket
+     * @param input DataInputStream información de entradas.
+     * @param output DataOutputStream información de salidas.
+     * @param jugador Jugador que pertenece a la partida online.
+     * @param nombre String nombre del jugador
+     * @param panel MultiGamePanel donde se es visible el juego.
+     */
     public ServerHandler(Socket socket, DataInputStream input, DataOutputStream output, Jugador jugador, String nombre, MultiGamePanel panel) {
         this.socket = socket;
         this.input = input;
@@ -46,7 +55,9 @@ public class ServerHandler {
     }
 
     
-    
+    /**
+     * Hilo donde se desarrolla el juego.
+     */
     private final Thread gameThread = new Thread(new Runnable() {
         @Override
         public void run() {
@@ -64,14 +75,30 @@ public class ServerHandler {
         }
     });
     
+    /**
+     * Método para enviar disparo. 
+     * @param i int coordenada vertical de la posición del disparo en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la parrilla.
+     */
     public void hitSent(int i, int j) {
         
     }
     
+    /**
+     * Función para enviar información de Nave si un disparo destruye una.
+     * @param i int coordenada vertical de la posición del disparo en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la parrilla.
+     * @return Nave si se destruyo alguna, null si no destruyó.
+     */
     public Nave hasHitDestroyed(int i, int j) {
         return null; //Debe cambiar
     }
-
+    
+    /**
+     * Método para enviar disparo. 
+     * @param i int coordenada vertical de la posición del disparo en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la parrilla.
+     */
     void shoot(int i, int j) {
         try {
             output.writeUTF("CLIENTE#DISPARO$" + i + "," + j);
@@ -80,6 +107,11 @@ public class ServerHandler {
         }
     }
 
+    /**
+     * Metodo que interpreta los comandos que el servidor le envia y los aplica
+     * a la partida.
+     * @param serverResponse String con los comandos que envía el servido.
+     */
     private void interpretarRespuesta(String serverResponse) {
         if (serverResponse.startsWith("SERVER#")) {
             String comando = serverResponse.substring(7);
@@ -136,10 +168,20 @@ public class ServerHandler {
         }
     }
     
+     /**
+     * Función para recibir disparo.
+     * @param i int coordenada vertical de la posición del disparo en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la parrilla.
+     * @return true si el disparo dió en una nave sino false.
+     */
     private Boolean getHit(int i, int j) {
         return jugador.recibirDisparo(i, j);
     }
-
+    
+    /**
+     * Método para avisar al servidor que el jugador ha colocado su flota 
+     * correctamente.
+     */
     public void setReady() {
         try {
             output.writeUTF("CLIENTE#ISREADY");
@@ -148,6 +190,9 @@ public class ServerHandler {
         }
     }
     
+    /**
+     * Envia al servidor el comando para cambiar de turno.
+     */
     public void declaraFinTurno() {
         try {
             output.writeUTF("CLIENTE#FINTURNO");
@@ -155,11 +200,17 @@ public class ServerHandler {
             Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Método pára abandonar de la partida.
+     */
     void exit() {
         panel.exit();
     }
     
+    /**
+     * Método pára terminar el socket abandonar de la partida.
+     */
     public void endSocket() {
         try {
             this.socket.close();

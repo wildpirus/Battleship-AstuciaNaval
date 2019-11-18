@@ -23,7 +23,7 @@ import server.ServerHandler;
 import tipografias.Fuente;
 
 /**
- *
+ * Clase para el panel donde se ejecuta los juegos locales.
  * @author wildg
  */
 public class MultiGamePanel extends javax.swing.JPanel  {
@@ -36,13 +36,17 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     int ii;
     ServerHandler sh;
     
+    /**
+     * Constructor para un panel de juego multijugador local. 
+     * @param d Display Frame donde se mostrará el panel.
+     */
     public MultiGamePanel(Display d) {
         initComponents();
         this.d = d;
     }
     
     /**
-     * Creates new form SetFormationPanel
+     * Constructor para un panel de juego multijugador local. 
      */
     public MultiGamePanel() {
         initComponents();
@@ -216,6 +220,9 @@ public class MultiGamePanel extends javax.swing.JPanel  {
         this.d.setBGSound();
     }//GEN-LAST:event_bgSoundLabelMouseClicked
 
+    /**
+     * Método para inicializar los componentes del panel.
+     */
     public void init(){
         try {
             //Server Setup block
@@ -275,6 +282,9 @@ public class MultiGamePanel extends javax.swing.JPanel  {
         }
     }
     
+    /**
+     * Método que hace visible el tablero de tiro del jugador.
+     */
     public void setTableroTiro(){
         this.jLayeredPane1.removeAll();
         this.jLayeredPane1.add(t1,0);
@@ -282,6 +292,9 @@ public class MultiGamePanel extends javax.swing.JPanel  {
         this.repaint();
     }
     
+    /**
+     * Método que hace visible el tablero de Flota del jugador.
+     */
     public void setTableroFlota(){
         this.jLayeredPane1.removeAll();
         this.jLayeredPane1.add(f1,0);
@@ -289,10 +302,17 @@ public class MultiGamePanel extends javax.swing.JPanel  {
         this.repaint();
     }
     
+    /**
+     * Método que añade un panel negro al frame del juego para cubrir los tableros.
+     */
     public void cover(){
         this.d.cover();
     }
     
+    /**
+     * Método que quita el panel negro agregado al frame del juego para cubrir 
+     * los tableros.  
+     */
     public void uncover(){
         this.d.uncover();
     }
@@ -307,11 +327,18 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     private javax.swing.JPanel rowsPanel;
     private javax.swing.JButton setFormationButton;
     // End of variables declaration//GEN-END:variables
-
+    
+    /**
+     * Método para asignar un String a nameLabel. 
+     * @param nombre String nobre del jugador.
+     */
     public void setNombre(String nombre) {
         nameLabel.setText(nombre);
     }
     
+    /**
+     * Método para salir de este panel.
+     */
     public void exit() {
         d.setSelectGM();
     }

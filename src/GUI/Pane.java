@@ -11,29 +11,45 @@ import javax.swing.JDialog;
 import tipografias.Fuente;
 
 /**
- *
+ * Clase que desplega una ventana emergente para comunicarle un mensaje 
+ * al usuario.
  * @author wildg
  */
 public class Pane extends javax.swing.JPanel {
     JDialog dialog;
     /**
-     * Creates new form Pane
+     * Crea una ventana emergente para comunicarle un mensaje 
+     * al usuario.
      */
     public Pane() {
         initComponents();
     }
     
+    /**
+     * Crea una ventana emergente para comunicarle un mensaje 
+     * al usuario.
+     * @param dialog JDialog que contendrá al panel
+     * @param mensaje String
+     */
     public Pane(JDialog dialog,String mensaje) {
         initComponents();
         this.dialog = dialog;
         this.avisoLabel.setText(mensaje);
     }
     
+    /**
+     * Metodo para cambiar color de un componente.
+     * @param c Componente al qe se le cabiará el color.
+     */
     public void mEn(Component c){
         c.setBackground(Color.BLACK);
         c.setForeground(Color.white);
     }
     
+    /**
+     * Metodo para cambiar color de un componente.
+     * @param c Componente al qe se le cabiará el color.
+     */
     public void mEx(Component c){
         c.setBackground(Color.CYAN);
         c.setForeground(Color.BLACK);

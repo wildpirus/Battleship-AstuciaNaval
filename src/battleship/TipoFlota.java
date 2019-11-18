@@ -6,7 +6,7 @@
 package battleship;
 
 /**
- *
+ * enum para los diferenres tipos de flotas
  * @author wildg
  */
 public enum TipoFlota {
@@ -18,10 +18,18 @@ public enum TipoFlota {
     
     private final TipoNave[] flota;
     
+    /**
+     * Constructor
+     * @param flota 
+     */
     private TipoFlota(TipoNave[] flota){
         this.flota=flota;
     }
-
+    
+    /**
+     * Función que obtener array que contirne las naves de la flota.
+     * @return TipoNave[] que contirne las naves de la flota.
+     */
     public TipoNave[] getFlota() {
         return flota;
     }

@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 /**
- *
+ * Clase para el panel donde se ejecuta los juegos locales. 
  * @author wildg
  */
 public class LocalGamePanel extends javax.swing.JPanel  {
@@ -32,13 +32,18 @@ public class LocalGamePanel extends javax.swing.JPanel  {
     TableroTiro  t1;
     TableroTiro  t2;
     int ii;
+    
+    /**
+     * Constructor para un panel de juego local.
+     * @param d Display Frame donde se mostrará el panel.
+     */
     public LocalGamePanel(Display d) {
         initComponents();
         this.d = d;
     }
     
     /**
-     * Creates new form SetFormationPanel
+     * Constructor para un panel de juego local.
      */
     public LocalGamePanel() {
         initComponents();
@@ -242,7 +247,10 @@ public class LocalGamePanel extends javax.swing.JPanel  {
             exit();
         }
     }//GEN-LAST:event_exitLabelMouseClicked
-
+    
+    /**
+     * Método para inicializar los componentes del panel.
+     */
     public void init(){
         initComponents();
         jugador1 = new Jugador();
@@ -290,6 +298,10 @@ public class LocalGamePanel extends javax.swing.JPanel  {
         }
     }
     
+    /**
+     * Método que hace visible el tablero del jugador en turno.
+     * @param i int con indice del jugador en turno.
+     */
     public void setTablero(int i){
         this.jLayeredPane1.removeAll();
         if(i==1){
@@ -302,20 +314,35 @@ public class LocalGamePanel extends javax.swing.JPanel  {
         this.repaint();
     }
     
+    /**
+     * Método que añade un panel negro al frame del juego para cubrir los tableros.
+     */
     public void cover(){
         radarLabel.setVisible(false);
         this.d.cover();
     }
     
+    /**
+     * Método que quita el panel negro agregado al frame del juego para cubrir 
+     * los tableros.  
+     */
     public void uncover(){
         this.d.uncover();
         radarLabel.setVisible(true);
     }
     
+    /**
+     * Método para salir de este panel.
+     */
     public void exit(){
         d.setSelectGM();
     }
     
+    /**
+     * Método que desplega una ventana emergente para comunicarle un mensaje 
+     * al usuario.
+     * @param mensaje String que se va a mostrar
+     */
     public void showDialog(String mensaje){
         cover();
         Display.showMessageDialog(d,mensaje);

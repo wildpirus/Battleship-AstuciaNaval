@@ -6,7 +6,7 @@
 package battleship;
 
 /**
- *
+ * enum para los tiferentes tipos de naves.
  * @author wildg
  */
 public enum TipoNave {
@@ -17,11 +17,19 @@ public enum TipoNave {
     PORTAAVIONES (new int[][] {{0, 0},{1, 0},{2, 0},{3, 0}});   //4x1
     
     private final int[][] dimensiones;
-
+    
+    /**
+     * Contructor
+     * @param dimensiones 
+     */
     private TipoNave(int[][] dimensiones) {
         this.dimensiones = dimensiones;
     }
-
+    
+    /**
+     * Función para obtener diensiones de la nave.
+     * @return int[][] con dimensiones de la nave.
+     */
     public int[][] getDimensiones() {
         return dimensiones;
     }

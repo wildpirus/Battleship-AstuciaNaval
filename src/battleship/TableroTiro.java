@@ -18,13 +18,17 @@ import javax.swing.Timer;
 
 
 /**
- *
+ * Clase para representar el tablero de la tiro de un jugador.
  * @author wildg
  */
 public class TableroTiro extends Tablero implements MouseListener{
     
     private CasillaTiro[][] casillas;
     
+    /**
+     * Contructor.
+     * @param jugador Jugador dueño del tablero. 
+     */
     public TableroTiro(Jugador jugador) {
         super(jugador);
         this.casillas = new CasillaTiro[10][10];
@@ -37,11 +41,19 @@ public class TableroTiro extends Tablero implements MouseListener{
         }
     }
     
+    /**
+     * Método para agregar una nave enemiga destruida.
+     * @param nave Nave enemiga destruida.
+     */
     public void colocarNave(Nave nave){
         this.naves.add(nave);
         this.add(nave, 1);
     }
     
+    /**
+     * Función para obtener las casillas del panel.
+     * @return CasillaTiro[][] casillas del panel.
+     */
     public CasillaTiro[][] getCasillas() {
         return casillas;
     }
@@ -77,19 +89,39 @@ public class TableroTiro extends Tablero implements MouseListener{
             }
         }
     }
-
+    
+    /**
+     * Overridable
+     * @param me MouseEvent
+     */
     @Override
     public void mousePressed(MouseEvent me) {}
-
+    
+    /**
+     * Overridable
+     * @param me MouseEvent
+     */
     @Override
     public void mouseReleased(MouseEvent me) {}
-
+    
+    /**
+     * Overridable
+     * @param me MouseEvent
+     */
     @Override
     public void mouseEntered(MouseEvent me) {}
-
+    
+    /**
+     * Overridable
+     * @param me MouseEvent
+     */
     @Override
     public void mouseExited(MouseEvent me) {}
     
+    /**
+     * Método para reproducir el disparo segun su tipo
+     * @param b boolean true para acertado, false para no.
+     */
     private void playSoundExplo(boolean b){
         Clip c;
         try {

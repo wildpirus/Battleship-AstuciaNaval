@@ -11,30 +11,45 @@ import javax.swing.JDialog;
 import tipografias.Fuente;
 
 /**
- *
+ * Clase que crear una ventana emergente para que el usuario ingrese un String.
  * @author wildg
  */
 public class PInputPane extends javax.swing.JPanel {
     JDialog dialog;
     String de;
     /**
-     * Creates new form Pane
+     * Constructor  para crear una ventana emergente para que el usuario ingrese
+     * un String.
      */
     public PInputPane() {
         initComponents();
     }
     
+    /**
+     * Constructor  para crear una ventana emergente para que el usuario ingrese
+     * un String.
+     * @param dialog JDialog que contendrá al panel
+     * @param mensaje String
+     */
     public PInputPane(JDialog dialog,String mensaje) {
         initComponents();
         this.dialog = dialog;
         this.avisoLabel.setText(mensaje);
     }
     
+    /**
+     * Metodo para cambiar color de un componente.
+     * @param c Componente al qe se le cabiará el color.
+     */
     public void mEn(Component c){
         c.setBackground(Color.BLACK);
         c.setForeground(Color.white);
     }
     
+    /**
+     * Metodo para cambiar color de un componente.
+     * @param c Componente al qe se le cabiará el color.
+     */
     public void mEx(Component c){
         c.setBackground(Color.CYAN);
         c.setForeground(Color.BLACK);
@@ -120,6 +135,10 @@ public class PInputPane extends javax.swing.JPanel {
         mEx(jButton1);
     }//GEN-LAST:event_jButton1MouseExited
 
+    /**
+     * Función para retornar lo que ingresó el usuario.
+     * @return String con lo que ingresó el usuario.
+     */
     public String getDe() {
         return de;
     }

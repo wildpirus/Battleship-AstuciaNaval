@@ -21,15 +21,23 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 /**
- *
+ * Clase para representar el tablero de la tiro de un jugador online.
  * @author Guacha
  */
 public class TableroTiroOnline extends TableroTiro{
     
+    /**
+     * Contructor
+     * @param jugador Jugador dueño del tablero 
+     */
     public TableroTiroOnline(JugadorOnline jugador) {
         super(jugador);
     }
     
+    /**
+     * Envia disparo.
+     * @param me MouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent me) {
         JugadorOnline j = (JugadorOnline) jugador;
@@ -45,6 +53,12 @@ public class TableroTiroOnline extends TableroTiro{
         }
     }
     
+    /**
+     * Método para mostrar resultados de un disparo en el tablero de tiro.
+     * @param i int coordenada vertical de la posición del disparo en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la parrilla.
+     * @param hit boolean, true si le dió a una nave, false si falló.
+     */
     public void showMark(int i, int j, boolean hit) {
         CasillaTiro[][] casillas = getCasillas();
         if (hit) {
@@ -67,6 +81,10 @@ public class TableroTiroOnline extends TableroTiro{
         playSoundExplo(hit);
     }
     
+    /**
+     * Método para reproducir el disparo segun su tipo
+     * @param b boolean true para acertado, false para no.
+     */
     private void playSoundExplo(boolean b){
         Clip c;
         try {

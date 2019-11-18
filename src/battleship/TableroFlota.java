@@ -13,13 +13,18 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JLabel;
 
 /**
- *
+ * Clase para representar el tablero de la flota de un jugador.
  * @author wildg
  */
 public class TableroFlota extends Tablero implements MouseListener, MouseMotionListener{
     
     private CasillaFlota[][] casillas;
     
+    /**
+     * Constructor.
+     * @param jugador Jugador dueño del panel.
+     * @param tipoFlota TipoFlota usada para esta partida.
+     */
     public TableroFlota(Jugador jugador, TipoFlota tipoFlota) {
         super(jugador);
         this.casillas = new CasillaFlota[10][10];
@@ -46,11 +51,11 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
     }
     
     /**
-     * 
-     * @param p matriz de la ficha
-     * @param pos ubicacion primera casilla de la ficha
-     * @param tab matriz de posiciones
-     * @return 
+     * Función para saber si la ficha cabe en el tablero.
+     * @param p matriz de la ficha.
+     * @param pos ubicacion primera casilla de la ficha.
+     * @param tab matriz de posiciones.
+     * @return boolean true si la nave está bien posicionada, false si no.
      */
     private boolean cabeEnTablero(int[][] p,int[] pos, boolean[][]tab){
         for (int i = 0; i < p.length; ++i) {
@@ -67,6 +72,12 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
         return true;
     }
     
+    /**
+     * Método para colocar una nave.
+     * @param p matriz de la ficha.
+     * @param pos ubicacion primera casilla de la ficha.
+     * @param tab matriz de posiciones.
+     */
     private void colocarNave(int[][] p,int[] pos,boolean[][] tab){
         for (int i = 0; i < p.length; ++i) {
             int[] pp = p[i];
@@ -76,6 +87,10 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
         }
     }
     
+    /**
+     * Función si todas las naves están bien colocadas.
+     * @return boolean true si las naves están bien posicionadas, false si no.
+     */
     private boolean verificarFormacion(){
         boolean[][] tab = new boolean[this.casillas.length][this.casillas.length];
         for (Nave nave : this.naves) {
@@ -88,6 +103,10 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
         return true;
     }
     
+    /**
+     * Funcion para colocar naves en el tablero de flota.
+     * @return boolean true si las naves están bien posicionadas, false si no.
+     */
     public boolean colocarNaves(){
         if(verificarFormacion()){
             for (Nave nave : this.naves) {
@@ -105,15 +124,32 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
         }
     }
     
+    /**
+     * Función para obtener area ocupada por una casilla de la flota.
+     * @param i int coordenada vertical de la posición en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la parrilla.
+     * @return Rectangle con area ocupada por la casilla.
+     */
     public Rectangle getArea(int i, int j){
         JLabel t = this.casillas[i][j]; 
         return new Rectangle(t.getX(),t.getY(),t.getWidth(),t.getHeight());
     }
     
+    /**
+     * Función para obtener el punto en el que se ubica la casilla en la 
+     * parrilla de la flota.
+     * @param i int coordenada vertical de la posición en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la 
+     * parrilla.
+     * @return 
+     */
     public JLabel getPointInGrid(int i, int j){
         return this.casillas[i][j];
     }
     
+    /**
+     * Método para hacer que las naves no de puedan mover más de su posición.
+     */
     public void nor(){
         for (Nave nave : this.naves) {
             nave.removeMouseListener(this);
@@ -121,14 +157,32 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
         }
     }
     
+    /**
+     * Función para recibir un disparo.
+     * @param i int coordenada vertical de la posición en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la 
+     * parrilla.
+     * @return boolean true si acertó, false si falló.
+     */
     public boolean recibirDisparo(int i,int j){
         return casillas[i][j].isHit();
     }
     
+    /**
+     * Función para saber si un disparo destruyó una nave.
+     * @param i int coordenada vertical de la posición en la parrilla.
+     * @param j int coordenada horizontal de la posición del disparo en la 
+     * parrilla.
+     * @return Nave si se destruyó una, null si no.
+     */
     public Nave hasDestroyed(int i,int j){
         return casillas[i][j].hasDestroyed();
     }
     
+    /**
+     * Método que detecta cuando se da clic sobre una ficha para girarla.
+     * @param me MouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent me) {
         if(me.getComponent() instanceof Nave){
@@ -137,6 +191,10 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
         }
     }
     
+    /**
+     * Nétodo para soltar una ficha movida.
+     * @param me MouseEvent
+     */
     @Override
     public void mouseReleased(MouseEvent me) {
         if(me.getComponent() instanceof Nave){
@@ -169,7 +227,11 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
             }
         }
     }
-
+    
+    /**
+     * Método para mover una ficha. 
+     * @param me MouseEvent
+     */
     @Override
     public void mouseDragged(MouseEvent me) {
         int xx = this.getLocationOnScreen().x+this.getBounds().x;
@@ -194,19 +256,39 @@ public class TableroFlota extends Tablero implements MouseListener, MouseMotionL
         }
         me.getComponent().setLocation(p1, p2);
     }
-
+    
+    /**
+     * Overridable
+     * @param me MouseEvent
+     */
     @Override
     public void mousePressed(MouseEvent me) {}
-
+    
+    /**
+     * Overridable
+     * @param me MouseEvent
+     */
     @Override
     public void mouseEntered(MouseEvent me) {}
-
+    
+    /**
+     * Overridable
+     * @param me MouseEvent
+     */
     @Override
     public void mouseExited(MouseEvent me) {}
-
+    
+    /**
+     * Overridable
+     * @param me MouseEvent
+     */
     @Override
     public void mouseMoved(MouseEvent me) {}
 
+    /**
+     * Función para saber si toda la flota de este jugador se destruyó.
+     * @return boolean true si todas las naves estan destruidas, false si no.
+     */
     public boolean flotaDestruida() {
         for (Nave nave : naves) {
             if(!nave.isDestroyed()) return false;

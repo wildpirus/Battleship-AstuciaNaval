@@ -21,6 +21,11 @@ public class CasillaFlota extends JLabel{
     private Nave nave;
     private final int i,j;
 
+    /**
+     * Crea una casilla para el panel de flota.
+     * @param i posición en fila.
+     * @param j posición en columna.
+     */
     public CasillaFlota(int i, int j) {
         this.hasBeenShot = false;
         this.nave = null;
@@ -33,6 +38,10 @@ public class CasillaFlota extends JLabel{
         this.nave = nave;
     }
     
+    /**
+     * Función para recibir un disparo.
+     * @return true si acertó, no si no.
+     */
     public boolean isHit(){
         this.hasBeenShot = true;
         boolean hit;
@@ -56,6 +65,10 @@ public class CasillaFlota extends JLabel{
         return hit;
     }
     
+    /**
+     * Metodo para saber si un tiro destruyó una nave.
+     * @return Nave si se destruyó, null si no.
+     */
     public Nave hasDestroyed(){
         if(nave!=null){
             if(nave.isDestroyed()) {

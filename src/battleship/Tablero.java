@@ -14,7 +14,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 /**
- *
+ * Clase abstracta para definir la estructura de los tableros del juego.
  * @author wildg
  */
 public abstract class Tablero extends JLayeredPane {
@@ -25,7 +25,10 @@ public abstract class Tablero extends JLayeredPane {
     protected ArrayList<Nave> naves;
     protected Jugador jugador;
     
-
+    /**
+     * Constructor
+     * @param jugador Jugador dueño del panel. 
+     */
     public Tablero(Jugador jugador) {
         this.jugador = jugador;
         this.size = new Dimension(500,500);

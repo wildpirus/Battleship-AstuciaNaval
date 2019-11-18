@@ -11,21 +11,24 @@ import javax.swing.ImageIcon;
 import tipografias.Fuente;
 
 /**
- *
+ * Clase para el panel donde se selecciona el modo e juego.
  * @author wildg
  */
 public class SelectGameMode extends javax.swing.JPanel {
 
     Display d;
     /**
-     * Creates new form SelectGameMode
-     * @param d
+     * Crea panel donde se selecciona el modo e juego. 
+     * @param d Display
      */
     public SelectGameMode(Display d) {
         initComponents();
         this.d = d;
     }
     
+    /**
+     * Crea panel donde se selecciona el modo e juego. 
+     */
     public SelectGameMode() {
         initComponents();
         if(this.d.getSoundSw()){
@@ -282,16 +285,27 @@ public class SelectGameMode extends javax.swing.JPanel {
         mEx(jLabel1);
     }//GEN-LAST:event_jLabel1MouseExited
 
+    /**
+     * Metodo para cambiar color de un componente.
+     * @param c Componente al qe se le cabiará el color.
+     */
     private void mEn(Component c){
         c.setBackground(Color.BLACK);
         c.setForeground(Color.white);
     }
-    
+
+    /**
+     * Metodo para cambiar color de un componente.
+     * @param c Componente al qe se le cabiará el color.
+     */
     private void mEx(Component c){
         c.setBackground(Color.CYAN);
         c.setForeground(Color.BLACK);
     }
     
+    /**
+     * Método para inicializar los componentes del panel.
+     */
     public void init(){
         this.initComponents();
         if(this.d.getSoundSw()){

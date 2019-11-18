@@ -9,7 +9,7 @@ import java.awt.Font;
 import java.io.InputStream;
 
 /**
- *
+ * enum para los diferentes tipos de fuente.
  * @author wildg
  */
 public enum Fuente {
@@ -18,10 +18,22 @@ public enum Fuente {
     Impact("impact.ttf");
     
     String path;
+    
+    /**
+     * Constructor.
+     * @param path nombre de fuente.
+     */
     private Fuente(String path){
         this.path = path;
     }
     
+    /**
+     * Funcion para obtener la fuente.
+     * @param estilo int 0 para normal, 1 para negrita, 2 para cursiva, 3 para 
+     * negrita y cursiva.
+     * @param tamaño int tamaño de la fuente.
+     * @return Fuente.
+     */
     public Font getFuente(int estilo, float tamaño){
         Font font;
         try {
