@@ -92,6 +92,8 @@ public class ServerHandler {
                         output.writeUTF("CLIENTE#CONFIRMHIT$" + i + "," + j);
                         if (this.jugador.flotaDestruida()) {
                             output.writeUTF("CLIENTE#DERROTA");
+                            Display.showMessageDialog(panel, "Toda tu flota ha sido destruida, Has perdido!");
+                            exit();
                         }
                     } catch (IOException ex) {
                         Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
