@@ -186,6 +186,7 @@ public class MultiGamePanel extends javax.swing.JPanel  {
         uncover();
         if(se==0){
             exit();
+            sh.endSocket();
         }
     }//GEN-LAST:event_exitLabelMouseClicked
 

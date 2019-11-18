@@ -160,4 +160,12 @@ public class ServerHandler {
         panel.exit();
     }
     
+    public void endSocket() {
+        try {
+            this.socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
