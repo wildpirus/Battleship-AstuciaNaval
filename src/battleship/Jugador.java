@@ -5,13 +5,22 @@
  */
 package battleship;
 
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import server.JugadorOnline;
+
 /**
  * Clase para un jugador en una partida
  * @author wildg
  */
 public class Jugador {
-    private TableroFlota miFlota;
-    private TableroTiro tableroTiro;
+    private final TableroFlota miFlota;
+    private final TableroTiro tableroTiro;
     private AstuciaNaval partida;
     
     /**
@@ -55,7 +64,11 @@ public class Jugador {
      * @return true si el disparo dió en una nave sino false.
      */
     public boolean recibirDisparo(int i, int j){
-        return this.miFlota.recibirDisparo(i, j);
+        boolean shot = this.miFlota.recibirDisparo(i, j);
+        if(this instanceof JugadorOnline){
+            playSoundExplo(shot);
+        }
+        return shot;
     }
     
     /**
@@ -100,5 +113,25 @@ public class Jugador {
         return tableroTiro;
     }
     
-    
+    public void playSoundExplo(boolean b){
+        Clip c;
+        try {
+            File m;
+            if(b){
+                m = new File("src/sources/Sounds/Blast.wav");
+            }else {
+                m = new File("src/sources/Sounds/miss.wav");
+            }
+            if(m.exists()){
+                AudioInputStream a = AudioSystem.getAudioInputStream(m);
+                c = AudioSystem.getClip();
+                c.open(a);
+                c.start();
+            }else {
+                System.out.println("ÑIEEEEEEEEEE");
+            }
+        }catch (IOException | LineUnavailableException | UnsupportedAudioFileException e)   {
+
+        } 
+    }
 }

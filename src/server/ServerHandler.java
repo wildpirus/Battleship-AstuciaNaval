@@ -5,6 +5,7 @@
  */
 package server;
 
+import GUI.Display;
 import GUI.MultiGamePanel;
 import battleship.Jugador;
 import battleship.Nave;
@@ -14,7 +15,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 
 /**
@@ -106,7 +106,8 @@ public class ServerHandler {
             } else if(comando.startsWith("INICIOTURNO")) {
                 JugadorOnline j = (JugadorOnline) this.jugador;
                 j.setInTurno();
-                JOptionPane.showMessageDialog(null, "Es tu turno!");
+                panel.setTableroTiro();
+                Display.showMessageDialog(panel, "Es tu turno!");
             } else if (comando.contains("HIT")){
                 JugadorOnline jug = (JugadorOnline) jugador;
                 if (comando.contains("CONFIRM")) {
@@ -119,13 +120,14 @@ public class ServerHandler {
                     int j = Integer.parseInt(comando.substring(10));
                     jug.updateHit(i, j, false);
                     jug.finTurno();
+                    panel.setTableroFlota();
                 }
             } else if(comando.equals("VICTORIA")) {
-                JOptionPane.showMessageDialog(null, "Felicidades! Ganaste!!!");
+                Display.showMessageDialog(panel, "Felicidades! Ganaste!!!");
                 JugadorOnline j = (JugadorOnline) jugador;
                 j.finishGame();
             } else if(comando.equals("DEFAULT")) {
-                JOptionPane.showMessageDialog(null, "El oponente se ha desconectado, ganas por default");
+                Display.showMessageDialog(panel, "El oponente se ha desconectado, ganas por default");
                 JugadorOnline j = (JugadorOnline) jugador;
                 j.finishGame();
             }

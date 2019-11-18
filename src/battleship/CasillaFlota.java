@@ -6,9 +6,11 @@
 package battleship;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  * Clase para una casilla en un TableroFlota. 
@@ -33,17 +35,25 @@ public class CasillaFlota extends JLabel{
     
     public boolean isHit(){
         this.hasBeenShot = true;
+        boolean hit;
         if(nave!=null){
-            this.setIcon(new ImageIcon("src/sources/mark.png"));
             nave.isHit(new Point(i,j));
-            JOptionPane.showMessageDialog(null, "Le han dado a tu flota en: " + i + ", " + j);
-            return true;
+            setIcon(new ImageIcon("src/sources/explo.gif"));
+            ActionListener action = (ActionEvent e) -> {
+                if(e.getSource() instanceof Timer){
+                    Timer timer = (Timer) e.getSource();
+                    timer.stop();
+                    setIcon(new ImageIcon("src/sources/mark.png"));
+                }
+            };
+            Timer timer = new Timer(2000, action);
+            timer.start();
+            hit = true;
         }else {
             this.setIcon(new ImageIcon("src/sources/miss.png"));
-            JOptionPane.showMessageDialog(null, "El enemigo ha fallado un disparo en: " + i + ", " + j);
-            return false;
-            
+            hit = false;
         }
+        return hit;
     }
     
     public Nave hasDestroyed(){

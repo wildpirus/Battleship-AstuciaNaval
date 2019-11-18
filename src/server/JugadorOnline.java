@@ -5,10 +5,10 @@
  */
 package server;
 
+import GUI.Display;
 import battleship.Jugador;
 import battleship.TableroFlota;
 import battleship.TipoFlota;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,7 +62,7 @@ public class JugadorOnline extends Jugador{
     }
 
     void finTurno() {
-        JOptionPane.showMessageDialog(null, "Has fallado, se ha terminado tu turno :v"); //PlaceHolder
+        Display.showMessageDialog(this.tableroTiro, "Has fallado, se ha terminado tu turno :v"); //PlaceHolder
         this.inTurno = false;
         handler.declaraFinTurno();
     }

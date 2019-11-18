@@ -8,14 +8,19 @@ package GUI;
 import battleship.AstuciaNaval;
 import battleship.TableroFlota;
 import battleship.TableroTiro;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import server.JugadorOnline;
 import server.ServerHandler;
+import tipografias.Fuente;
 
 /**
  *
@@ -52,99 +57,175 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        exitLabel = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        boardNameLabel = new javax.swing.JLabel();
+        setFormationButton = new javax.swing.JButton();
+        columnsPanel = new javax.swing.JPanel();
+        bgSoundLabel = new javax.swing.JLabel();
+        rowsPanel = new javax.swing.JPanel();
 
         setOpaque(false);
 
-        jLabel1.setBackground(new java.awt.Color(255, 153, 102));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(java.awt.Color.orange);
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Jugador");
-
-        jLayeredPane1.setBackground(new java.awt.Color(255, 204, 204));
+        jLayeredPane1.setBackground(java.awt.Color.gray);
         jLayeredPane1.setMinimumSize(new java.awt.Dimension(500, 500));
         jLayeredPane1.setOpaque(true);
 
-        jLabel2.setBackground(new java.awt.Color(51, 255, 102));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(java.awt.Color.orange);
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Formación de Flota");
-
-        jButton1.setBackground(java.awt.Color.orange);
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        exitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/backspace-arrow.png"))); // NOI18N
+        exitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitLabelMouseClicked(evt);
             }
         });
+
+        nameLabel.setBackground(new java.awt.Color(255, 153, 102));
+        nameLabel.setFont(Fuente.EuroStyle.getFuente(0, 14));
+        nameLabel.setForeground(java.awt.Color.green);
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel.setText("Jugador");
+
+        boardNameLabel.setBackground(new java.awt.Color(51, 255, 102));
+        boardNameLabel.setFont(Fuente.EuroStyle.getFuente(0, 14));
+        boardNameLabel.setForeground(java.awt.Color.green);
+        boardNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        boardNameLabel.setText("Formación de Flota");
+
+        setFormationButton.setBackground(java.awt.Color.green);
+        setFormationButton.setFont(Fuente.Impact.getFuente(0, 12));
+        setFormationButton.setText("Aceptar");
+        setFormationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setFormationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout columnsPanelLayout = new javax.swing.GroupLayout(columnsPanel);
+        columnsPanel.setLayout(columnsPanelLayout);
+        columnsPanelLayout.setHorizontalGroup(
+            columnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        columnsPanelLayout.setVerticalGroup(
+            columnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        bgSoundLabel.setBackground(java.awt.Color.orange);
+        bgSoundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/volume-up.png"))); // NOI18N
+        bgSoundLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bgSoundLabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout rowsPanelLayout = new javax.swing.GroupLayout(rowsPanel);
+        rowsPanel.setLayout(rowsPanelLayout);
+        rowsPanelLayout.setHorizontalGroup(
+            rowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        rowsPanelLayout.setVerticalGroup(
+            rowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(exitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(bgSoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rowsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(176, 176, 176))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(columnsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(boardNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(setFormationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exitLabel)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boardNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(setFormationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(columnsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 466, Short.MAX_VALUE)
+                        .addComponent(bgSoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rowsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void exitLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMouseClicked
         // TODO add your handling code here:
-            if(jugador.colocarNaves()){
-                System.out.println("bien");
-                this.jLayeredPane1.removeAll();
-                ii++;
-                this.jLabel2.setText("Tablero de tiro");
-                this.jButton1.setVisible(false);
-                setTablero();
-                sh.setReady();
-            }else {
-                System.out.println("mal");
-                JOptionPane.showMessageDialog(null, "Mal");
-            }
-            
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        cover();
+        int se = Display.showConfirmationDialog(d,"Esta seguro que desea salir?");
+        uncover();
+        if(se==0){
+            exit();
+        }
+    }//GEN-LAST:event_exitLabelMouseClicked
+
+    private void setFormationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setFormationButtonActionPerformed
+        // TODO add your handling code here:
+        if(jugador.colocarNaves()){
+            System.out.println("bien");
+            this.jLayeredPane1.removeAll();
+            ii++;
+            this.boardNameLabel.setText("Tablero de tiro");
+            this.setFormationButton.setVisible(false);
+            setTableroFlota();
+            sh.setReady();
+        }else {
+            System.out.println("mal");
+            Display.showMessageDialog(d, "Formación de flota no válida");
+        }
+    }//GEN-LAST:event_setFormationButtonActionPerformed
+
+    private void bgSoundLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgSoundLabelMouseClicked
+        // TODO add your handling cbgSoundLabele:
+        if(this.d.getSoundSw()){
+            bgSoundLabel.setIcon(new ImageIcon("src/sources/mute.png"));
+        }else {
+            bgSoundLabel.setIcon(new ImageIcon("src/sources/volume-up.png"));
+        }
+        this.d.setBGSound();
+    }//GEN-LAST:event_bgSoundLabelMouseClicked
 
     public void init(){
         try {
             //Server Setup block
-            String serverIP = JOptionPane.showInputDialog("Ingrese la IP del servidor");
+            String serverIP = Display.showInputDialog(d, "Ingrese la IP del servidor.");
             Socket s = new Socket(serverIP, 14999);
             DataInputStream input = new DataInputStream(s.getInputStream());
             DataOutputStream output = new DataOutputStream(s.getOutputStream());
-            String nombre = JOptionPane.showInputDialog("Escriba su nombre");
+            String nombre = Display.showInputDialog(d, "Escriba su nombre");
             jugador = new JugadorOnline();
             sh = new ServerHandler(s, input, output, jugador, nombre, this);
-            JOptionPane.showMessageDialog(null, "Conexión exitosa!"); //Placeholder
+            Display.showMessageDialog(d, "Conexión exitosa!"); //Placeholder
             
             
             jugador.setHandler(sh);
@@ -152,9 +233,37 @@ public class MultiGamePanel extends javax.swing.JPanel  {
             f1.setSize(new Dimension(500,500));
             t1 = this.jugador.getTableroTiro();
             t1.setSize(new Dimension(500,500));
-            this.jLabel1.setText(nombre);
+            this.nameLabel.setText(nombre);
             jLayeredPane1.add(f1,new Integer(0));
             ii=0;
+            
+            columnsPanel.setLayout(new GridLayout(1,10));
+        columnsPanel.setOpaque(false);
+        JLabel[] u1 = new JLabel[10];
+        for (int i = 0; i < 10; i++) {
+            u1[i]= new JLabel();
+            this.columnsPanel.add(u1[i]);
+            u1[i].setHorizontalAlignment(SwingConstants.CENTER);
+            u1[i].setText(Integer.toString(i+1));
+            u1[i].setForeground(Color.GREEN);
+            u1[i].setFont(Fuente.EuroStyle.getFuente(0, 14));
+        }
+        rowsPanel.setLayout(new GridLayout(10,1));
+        rowsPanel.setOpaque(false);
+        JLabel[] u2 = new JLabel[10];
+        for (int i = 0; i < 10; i++) {
+            u2[i]= new JLabel();
+            this.rowsPanel.add(u2[i]);
+            u2[i].setHorizontalAlignment(SwingConstants.CENTER);
+            u2[i].setText(Character.toString((char)(i+65)));
+            u2[i].setForeground(Color.GREEN);
+            u2[i].setFont(Fuente.EuroStyle.getFuente(0, 14));
+        }
+        if(this.d.getSoundSw()){
+            bgSoundLabel.setIcon(new ImageIcon("src/sources/volume-up.png"));
+        }else {
+            bgSoundLabel.setIcon(new ImageIcon("src/sources/mute.png"));
+        }
             
             /*t1.setVisible(true);
             t1.setOpaque(true);*/
@@ -165,10 +274,17 @@ public class MultiGamePanel extends javax.swing.JPanel  {
         }
     }
     
-    public void setTablero(){
+    public void setTableroTiro(){
         this.jLayeredPane1.removeAll();
         this.jLayeredPane1.add(t1,0);
-        this.jLabel1.setText("Jugador");
+        this.boardNameLabel.setText("Tablero de tiro");
+        this.repaint();
+    }
+    
+    public void setTableroFlota(){
+        this.jLayeredPane1.removeAll();
+        this.jLayeredPane1.add(f1,0);
+        this.boardNameLabel.setText("Mi flota");
         this.repaint();
     }
     
@@ -181,14 +297,18 @@ public class MultiGamePanel extends javax.swing.JPanel  {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel bgSoundLabel;
+    private javax.swing.JLabel boardNameLabel;
+    private javax.swing.JPanel columnsPanel;
+    private javax.swing.JLabel exitLabel;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JPanel rowsPanel;
+    private javax.swing.JButton setFormationButton;
     // End of variables declaration//GEN-END:variables
 
     public void setNombre(String nombre) {
-        jLabel1.setText(nombre);
+        nameLabel.setText(nombre);
     }
     
     public void exit() {
